@@ -1,0 +1,7 @@
+
+*****Création de projet*****
+
+-npx expo start
+-expo init myApp
+-npm install react-redux
+-npm install redux
