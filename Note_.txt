@@ -1,0 +1,272 @@
+https://snack.expo.io
+
+***** Compte Snack Expo *****
+Email : ligrejutsu96@gmail.com
+Mot de passe : 12345678
+Nom utilisateur : Jughead96
+
+***** LES BASES DE REACT ET DE REACT NATIVE *****
+
+*** REACT.JS est un framework qui permet de créer des applications pour le web.
+C'est une librairie js pour le developpement web. En realité REACT.JS permet 
+la gestion des composants de l'application web. Mais c'est la librairie REACT-DOM
+qui va permettre de connecter ces composants avec notre navigateur.
+
+*** REACT NATIVE c'est à peu près la meme chose, on a une librairie js concue pour le
+développement mobile. C'est à dire REACT NATIVE met à notre disposition des composants
+qui sont spécialement créés pour les applications mobiles, par exemple le composant VIEW
+proposé par REACT NATIVE a son équivalent en JAVA et en SWIFT ainsi lors de la compilation
+de notre interface utilisateur dans le langage NATIF des applications IOS et ANDROID. 
+Ce composant VIEW sera traduit par UA VIEW ou ANDROID.VIEW. REACT NATIVE permet aussi 
+d'accéder aux fonctionnalités du smartphone. Il va aussi plus loin car on va pouvoir aussi
+créer nos propres codes natifs c'est à dire nos propres modules qui seront développé à l'aide 
+de JAVA ou de SWIFT pour ensuite les connecter avec notre application codé avec REACT NATIVE.
+
+**Composant
+
+-La brique React = le composant
+Avec React, on développe notre application à l'aide de composant (component).
+Dans leur forme la plus simple, un composant décrit tout simplement ce qu'il
+affiche.
+un fichier = un component
+	title.js ou title.jsx
+Pour développer nos composant ici on utilisera tjrs pour un fichier un composant,
+un fichier peut biensur contenir plusieurs composants mais ce n'est pas une bonne pratique
+vu qu'on veut que nos composants soient partageables et testables, on va donc avoir ici
+un seul composant par fichier.
+
+-Un autre avantage du développement à l'aide de composant est que ici est la possibilité
+d'étendre l'utilisation de certains composants. Par exemple pour le composant WarningTitle
+on va réutiliser le composant title mais avec un style différent: on appelle ce genre de
+composants les composants dérivés. 
+
+--------------Rendre nos composants dynamiques--------------
+
+**La structure d'un composant
+
+Un composant est composé de 4 grands bloques : les imports, définition du composant, le style,
+export.
+-Les imports : c'est à dire que l'on va importer ce dont le composant a besoin
+-La définition du composant
+-Définir le style que l'on voudra appliquer aux éléments de nos composants
+-On va exporter notre composant 
+
+
+-----La définition du composant--------
+Ce composant s'appelle App()
+
+function App() {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.paragraph}>
+         editor and watch it change on your phone! Save to get a shareable url.
+      </Text>
+      <Card>
+        <AssetExample />
+      </Card>
+    </View>
+  );
+}
+
+ici c'est un composant fonctionnel et il returne ces éléments
+
+------3em block on définit le style------
+On définit le style que l'on souhaite appliquer à notre composant
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    paddingTop: Constants.statusBarHeight,
+    backgroundColor: '#ecf0f1',
+    padding: 8,
+  },
+  paragraph: {
+    margin: 24,
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+});
+
+après on exporte notre composant (on peut le faire directement en haut sur notre composant,
+comme on peut le faire aussi en bas)
+	export default App
+
+******l'API de React Native*******
+-Des composants spéciaux : 
+	Regroupe des composants React spécialement créés pour les applications mobiles
+		Ces composants sont compilés en langage natif par React Native
+			Pour les composants React Native view, celui ci sera compilé pour 
+			les IOS par UI View et pour les android par android.view
+ 
+******Ecrire les composants en JSX*******
+-JSX nous permet décrire nos composants de manière simplifiée
+-JS évolue au fil des années
+  Par exemple, les spécifications ES6
+  TypeScript
+-Le problème est que tous les navigateurs ne sont pas forcément à jour, donc les applications
+qui sont écrit en typeScript par exemple ne seront pas compatible avec les navigateurs.
+C'est pour cela qu'on va utiliser des Transpileur comme Babel, qui auront comme mission
+de transposer ce nouveau type de Js en en Js qui est compréhensible par le navigateur.
+
+-JSX = JavaScript XML
+-Ecrire nos composants avec JSX n'est pas donc un problème
+  La conversion pour les navigateurs est quasi-obligatoire
+-JSX et HTML ont le meme ancètre commun : XML
+-JSX est presque identique à HTML
+  <h1>Salut !</h1>
+-Cependant il ya quelque différence en Js, XML et HTML
+
+******JSX VS HTML******
+-La fermeture de certaines balises :
+  HTML : <img src="">
+  JSX : <img src="" /> (comme en XML)
+-En JSX, class est déja utilisé par Js du coup on pourra pas l'utiliser pour définir nos class CSS
+  HTML : <div class="">
+  JSX : <div className="">
+    En JSX on peut ajouter du JavaScript directement dans nos balises directement dans notre code,
+    Exemple :  HTML : <div style="background: red">
+              JSX : <div style={{ background: 'red' }}>
+
+              HTML : <p>Salut</p>
+              JSX : <p> { 'Salut' } </p>
+-On peut enrichir JSX avec nos propres tags (nos propres balises)
+  <FilmItem>
+
+  </FilmItem>
+
+*****Afficher du contenu à l'écran de notre smartphone******
+-On va utiliser notre composant Square?js dans App.js
+  On importe d'abord notre composant à partir de App.js
+    import Square from './components/Square';
+
+    Maintenant il suffit juste de l'ajouter dans le composant App()
+      <Square />
+
+
+*****Les Props*****
+-Elles sont essentiels car elles vont nous permettre des dynamiser les contenus de nos composants
+  Pour passer une variable en tant que props on devra lors de la définition du composant
+  ajouter cette propriété (exemple ici 'title') : <Square title={"Je suis une props"} />
+  Maintenant allons dans Square.js et enlevant notre constante : const title = 'Je suis un carré'
+  Pour utiliser une props dans un composant on fait : {this.props.title}  (this.props représente l'objet qui 
+  va contenir l'ensemble des props que l'on passe à ce composant).
+  On utilise cette facon décrire les propriétés avec this.props seulement pour les composants
+  qui sont défini avec un class.
+  Pour les composants fonctionnels on pourra récupérer les props d'une manière différente
+  Exemple : App.js <AssetExample value={"Je suis une props"} />
+            Dans son composant fonctionnel qui se trouve dans AssetExample.js, dans la fonction
+            AssetExample(props) on récupère les props en paramètres de la fonction
+            On peut aussi destructurer les props comme ca :
+              AssetExample({value}) on récupère les props en paramètres de la fonction avec le nom de la variable
+              qui est ici value.
+-Props.Children, une Props Spéciale : 
+      Dans le App.js faire ceci
+        <Square title={"Je suis une props"}> 
+          <Text>Je suis un children</Text>  
+        </Square> 
+
+      Dans le Square.js faire ceci
+        {this.props.children}
+-Le state d'un composant
+  Certains composants ont besoin de garder en mémoire certaines données
+  Le state est un objet qui prend différentes propriétés, chaque propriété aura une valeur initiale
+  On définit les state tout en haut de notre composant
+  Exemple : state = {
+    isBookmarked: false
+  }
+  Pour changer le state d'un composant on va toujours utiliser la méthode setState 
+  La méthode setState : aura 2 conséquences 
+    1 - Changer la valeur de la propriété
+    2 - Elle va engendrer un nouvel appel de la fonction render() pour afficher la différence
+    Attention, il est interdit d'écrire pour changer le state : 
+                this.state.isBookmarked = false
+                this.props.title = 'mon titre'
+              car on doit toujours passer par la fonction setState pour les state,
+              on a pas aussi le droit de changer les props car les props sont des 
+              valeurs qu'on utilise et que l'on ne change jamais.
+-Le HOOK USESTATE() : 
+  On a une nouvelle facon d'utiliser les state grace au HOOK qui ont été introduit avec
+  React 16, l'utilisation de la nouvelle facon d'utiliser les state commence dès la définition 
+  du composant. Cette fois notre composant n'est plus une class mais une fonction, on a donc
+  définit notre fonction grace à function NomFonction()
+  Exemple d'une nouvelle définition d'un state : 
+    const [isBookmarked, setIsBookmarked] = useState(false); 
+      // useState est importé directement de react et il prend comme parametre l'état initial qui est ici false
+    Ici pour définir notre state, on va utiliser un arret, cet arret va prendre comme premier valeur
+    le nom de la propriété 'isBookmarked', la 2e valeur sera la fonction que l'on pourra utiliser pour changer 
+    notre valeur isBookmarked. Par défaut on utilisera toujours 'set' suivi du nom de la première valeur
+    donc ici on utilisera 'setIsBookmarked'.
+    Du coup pour l'appeler on utilisera plus 'this.state.isBookmarked' mais plutot 'isBookmarked' vu que 
+    state n'est pas définit.
+    Enfin dans la méthode 'toggleBookmark' on va utiliser directement setIsBookmarked pour changer la valeur 
+    de isBookmarked, exemple : setIsBookmarked(isBookmarked). Tout comme la fonction setState(), une fois 
+    que cette valeur sera changé par setIsBookmarked, le composant va se mettre à jour et retourner une nouvelle
+    fois ce qu'il l'affiche. Au passage on voit ici que la méthode render() a disparu, en effet en javaScript 
+    une fonction n'a pas de méthode render() car tout simplement une fonction returne quelque chose.
+
+-Le style avec React Native
+  C'est ce style d'application du Css qu'on appelle 'inline style' :
+  <View style={{backgroundColor: 'red'}}>
+    <Text> {this.props.title} </Text>
+    {this.props.children}
+  </View>
+
+  Ici on a utilisé un objet javaScript {backgroundColor: 'red'} pour la propriété 'style' de l'élément 'View',
+  backgroundColor est la propriété, c'est très similaire au propriété Css. Or en JavaScript on utilise la 
+  camelCase c'est à dire le 2e mot prend une majuscule.
+
+  NB: Le inline style n'est pas conseillé mieux vaut définir du style qu'on va appliquer à notre composant comme ceci :
+      const styles = StyleSheet.create({
+        container: {backgroundColor: 'red'}  // container est une propriété qui prendre le style backgroundColor : red
+       })
+       
+        <View style={style.container}>
+          <Text> {this.props.title} </Text>
+          {this.props.children}
+        </View>
+  Ajouter du style grace à un arret :
+    Définir d'autres styles dedans
+    <View style={[{backgroundColor: this.props.color}, styles.container]} /> 
+
+-Flexbox : flex direction
+  On commence avec une première propriété : FLEX DIRECTION
+  Quand flexDirection prend la valeur 'row' cela veut dire : aligner à l'horizontale
+  Quand flexDirection prend la valeur 'row-reverse' cela veut dire : aligner à l'horizontale en partant de la droite
+  Quand flexDirection prend la valeur 'column' cela veut dire : aligner à la verticale
+  Quand flexDirection prend la valeur 'column-reverse' cela veut dire : aligner à la verticale du bas vers le haut
+
+-Flexbox : JUSTIFY CONTENT
+  On va parler de la propriété Flexbox nommée justifyContent
+    justifyContent : 'center' : cela aura pour effet d'aligner nos éléments au centre
+    justifyContent : 'space-between' : les élements vont s'éloigner le plus possible des uns des autres
+    justifyContent : 'flex-start' : étant la valeur par défaut, les éléments vont s'aligner sur le début de l'axe
+    justifyContent : 'flex-end' : les éléments vont s'aligner à partir de le fin de l'axe à droite
+    justifyContent : 'space-around' : les élements vont s'éloigner des uns des autres mais le premier élément et le dernier 
+                      élément ne s'aligneront pas tout au début ou tout à la fin du container mais laisserons un espace 
+                      entre ce début et cette fin du container
+    justifyContent : 'space-evenly' : toutes les distances seront égales, c'est à dire la distance qui sépare le premier élément
+                      du début du container est la meme distance qui sépare le premier élément du deuxième élément, cette distance
+                      est également la meme qui sépare le 2em élement du 3e élément et ainsi de suite
+-Flexbox : ALIGN ITEMS
+  On va parler de la propriété Flexbox nommée alignItems
+  La valeur qu'on donnera à notre alignItems fera que l'élément soit perpendiculaire à notre axe principal
+    Exemple : 
+      alignItems : 'center'
+      alignItems : 'flex-end'
+      alignItems : 'flex-start'
+-Flexbox : FLEX
+  On va voir la propriété nommée FLEX, qui va prendre pour valeur un chiffre qui va influencer la taille prise 
+  par l'élément 
+
+
+  
+
+
+
+
+
+
+
+
